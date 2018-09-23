@@ -1,3 +1,22 @@
+/*!
+ * dropify-multiple - Override your input files with style. Supports mulitple file upload
+ * @version v1.0.0
+ * @link http://github.com/brewengage/dropify-multiple
+ * @author Ravi Kannan <ravi@brewengage.com> (https://github.com/brewengage)
+ * @contributors Jeremy FAGIS <jeremy@fagis.fr> (http://fagis.fr)
+ * @contributors BrewEngage (added support for multi file upload)
+ * @license MIT
+ */
+
+;(function(root, factory) {
+  if (typeof define === 'function' && define.amd) {
+    define(['jquery'], factory);
+  } else if (typeof exports === 'object') {
+    module.exports = factory(require('jquery'));
+  } else {
+    root.DropifyMultiple = factory(root.jQuery);
+  }
+}(this, function($) {
 var pluginName = "DropifyMultiple";
 
 /**
@@ -416,7 +435,7 @@ DropifyMultiple.prototype.clearElement = function()
 /**
  * Reset file informations
  */
-Dropify.prototype.resetFile = function()
+DropifyMultiple.prototype.resetFile = function()
 {
     // free all the loaded file data to free up memory
     for ( var i = this.files.length; i >= 0; i--) 
@@ -703,9 +722,12 @@ DropifyMultiple.prototype.isDropified = function()
 $.fn[pluginName] = function(options) {
     this.each(function() {
         if (!$.data(this, pluginName)) {
-            $.data(this, pluginName, new Dropify(this, options));
+            $.data(this, pluginName, new DropifyMultiple(this, options));
         }
     });
 
     return this;
 };
+
+return DropifyMultiple;
+}));
